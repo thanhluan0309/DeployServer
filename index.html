@@ -1,0 +1,90 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>index</title>
+</head>
+<body>
+  <h1>Test Websocket</h1>
+  <input type="text" id="inputText"/>
+  <input type="button" value="send data" onclick="sendDATA()"/>
+  <br/>
+  <textarea rows="10" cols="50" id="content"></textarea>
+    <br/><br/>
+    
+    <span id="mySpan"  hidden ="hidden" >aaa</span>
+	<button onclick="showspan" id="showtest">show</button>	
+  <script>
+        var username = prompt("Nhap ho ten cua ban");
+        var websocket = new WebSocket("ws://localhost:8181");
+        websocket.onmessage=function(message){
+            processMessage(message);
+        }
+        websocket.onopen = function(message){
+            processOpen(message);
+        }
+        websocket.onclose = function(message){
+            processClose(message);
+        }
+        websocket.onerror = function(message){
+            processError(message);
+        }
+        //
+        function processOpen(message){
+            content.value += "Server is connect\n";
+            var mes = username +" vua moi vao phong\n"
+            if(typeof websocket != "undefined" && websocket.readyState == websocket.OPEN){
+                websocket.send(mes)
+            }
+            
+        }
+        function processMessage(message){
+            content.value += message.data+"\n";
+        }
+        function onerror(message){
+            content.value += "Loi xay ra voi" + message
+        }   
+        function processClose(message){
+            content.value += username +"Da roi phong"
+
+        }
+
+        
+        function sendDATA(){
+            $("#mySpan").show();
+            var mes = username+":"+inputText.value;
+            if(typeof websocket != "undefined" && websocket.readyState == websocket.OPEN){
+                websocket.send(mes)
+                inputText.value="";
+            }
+            
+        }
+        function getData(){
+          
+            localStorage.getItem("Id","asdasdasd");
+            return fetch(_url).then(function (response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            else {
+                return response.json();
+            }
+        }).then(function (data) {
+            console.log("data",data[0]);
+            content2.value = data
+        }).catch(function (error) {
+            return error;
+        })
+        }
+
+        $(document).ready(function(){
+  $("#showtest").click(function(){
+    $("#mySpan").show();
+  });
+});
+  </script>
+ 
+</body>
+</html>

@@ -1,0 +1,75 @@
+###
+POST http://localhost:8182/webchat/user/
+Content-Type: application/json
+
+{
+    "username":"luanneasdasdw",
+    "password":"123",
+    "name":"luan"
+}
+
+###
+POST http://localhost:8182/webchat/user/login
+Content-Type: application/json
+
+{
+    "username":"luannew",
+    "password":"123"
+}
+///create room
+###
+POST http://localhost:8182/webchat/room
+Content-Type: application/json
+
+{
+    "name":"chat vui qua"
+}
+///get ALL room
+###
+GET  http://localhost:8182/webchat/room
+
+//deleted room
+###
+POST http://localhost:8182/webchat/room/630c68f5a53c4bad1e220d0d
+Content-Type: application/json
+
+{
+    "name":"chat vui nhon"
+}
+//Create message
+###
+POST http://localhost:8182/webchat/message
+Content-Type: application/json
+
+{
+   
+    "room":"3"
+}
+//Update message
+###
+PUT  http://localhost:8182/webchat/message/
+Content-Type: application/json
+
+{
+    "message":"abcz zxczxczx zx ",
+   
+    "room":"153"
+}
+//get message
+###
+POST  http://localhost:8182/webchat/message/getMess
+Content-Type: application/json
+
+{
+    "room":2
+}
+
+//create participants
+###
+POST http://localhost:8182/webchat/participants
+Content-Type: application/json
+
+{
+    "user":"630c4bb1cb6961f889a09b8e",
+    "room":"630c6b687c3b0cfb11dfe755"
+}
