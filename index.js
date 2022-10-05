@@ -3,8 +3,10 @@ var WebSocketServer = require("websocket").server;
 var http = require("http");
 var clients = [];
 var server = http.createServer(function (request, response) {});
+
+const PORTsv = process.env.PORT || 8181;
 server.listen(8181, () => {
-  console.log("server socket is running port 8181");
+  console.log(`server socket is running port 8181 ${PORTsv}`);
 });
 wsServer = new WebSocketServer({ httpServer: server });
 wsServer.on("request", function (request) {
@@ -60,6 +62,10 @@ app.use("/webchat/message", messageRouter);
 app.use("/webchat/participants", participantsRouter);
 
 const PORT = process.env.PORT || 8182;
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 app.listen(PORT, () => {
-  console.log("server Api is running port 8182");
+  console.log(`server Api 2 is running port ${PORT}`);
 });
