@@ -27,7 +27,7 @@ const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const userRouter = require("./component/route/userRouter");
+
 const roomRouter = require("./component/route/roomRouter");
 const messageRouter = require("./component/route/messageRoute");
 const participantsRouter = require("./component/route/ParticipantsRouter");
@@ -53,13 +53,13 @@ const connectDB = async (req, res) => {
   }
 };
 app.use(express.json());
- connectDB();
+connectDB();
 
-app.use("/webchat/user", userRouter);
 app.use("/webchat/room", roomRouter);
 app.use("/webchat/message", messageRouter);
 app.use("/webchat/participants", participantsRouter);
 
-app.listen(8182, () => {
+const PORT = process.env.PORT || 8182;
+app.listen(PORT, () => {
   console.log("server Api is running port 8182");
 });
