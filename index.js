@@ -23,49 +23,49 @@ wsServer.on("request", function (request) {
 });
 
 //Server for API
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const bodyparser = require("body-parser");
-const cors = require("cors");
-const dotenv = require("dotenv");
+// const express = require("express");
+// const app = express();
+// const mongoose = require("mongoose");
+// const bodyparser = require("body-parser");
+// const cors = require("cors");
+// const dotenv = require("dotenv");
 
-const roomRouter = require("./component/route/roomRouter");
-const messageRouter = require("./component/route/messageRoute");
-const participantsRouter = require("./component/route/ParticipantsRouter");
-dotenv.config();
-app.use(bodyparser.json({ limit: "50mb" }));
-const corsOptions = {
-  origin: "http://localhost:8080",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const roomRouter = require("./component/route/roomRouter");
+// const messageRouter = require("./component/route/messageRoute");
+// const participantsRouter = require("./component/route/ParticipantsRouter");
+// dotenv.config();
+// app.use(bodyparser.json({ limit: "50mb" }));
+// const corsOptions = {
+//   origin: "http://localhost:8080",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
 
-const connectDB = async (req, res) => {
-  try {
-    await mongoose.connect(process.env.URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Mongo has connect ");
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
-app.use(express.json());
-connectDB();
+// const connectDB = async (req, res) => {
+//   try {
+//     await mongoose.connect(process.env.URL, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log("Mongo has connect ");
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(1);
+//   }
+// };
+// app.use(express.json());
+// connectDB();
 
-app.use("/webchat/room", roomRouter);
-app.use("/webchat/message", messageRouter);
-app.use("/webchat/participants", participantsRouter);
+// app.use("/webchat/room", roomRouter);
+// app.use("/webchat/message", messageRouter);
+// app.use("/webchat/participants", participantsRouter);
 
-const PORT = process.env.PORT || 8182;
+// const PORT = process.env.PORT || 8182;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-app.listen(PORT, () => {
-  console.log(`server Api 2 is running port ${PORT}`);
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
+// app.listen(PORT, () => {
+//   console.log(`server Api 2 is running port ${PORT}`);
+// });
